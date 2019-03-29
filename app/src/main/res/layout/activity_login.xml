@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/material_text_button"
+        style="@style/OutlinedButtonCustom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_input_default"
+        android:text="@string/text_button_entrar"
+    />
+</LinearLayout>
