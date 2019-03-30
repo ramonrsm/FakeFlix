@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">FakeFlix</string>
+
     <string name="hint_input_usuario">Email ou número de telefone</string>
     <string name="hint_input_senha">Senha</string>
+
+    <string name="textHelper_usuario">Informe um email ou número de telefone válido.</string>
+    <string name="textHelper_senha">A senha deve ter entre 4 e 60 caracteres.</string>
+
     <string name="text_button_entrar">Entrar</string>
+    <string name="text_toggle">MOSTRAR</string>
 </resources>

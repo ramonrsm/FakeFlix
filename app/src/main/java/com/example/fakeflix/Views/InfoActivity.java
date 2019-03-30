@@ -1,7 +1,9 @@
-package com.example.fakeflix;
+package com.example.fakeflix.Views;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.fakeflix.R;
 
 public class InfoActivity extends AppCompatActivity {
 
