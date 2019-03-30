@@ -21,7 +21,7 @@ public class Client {
         this.password = password;
     }
 
-    private Integer getId() {
+    public Integer getId() {
         return id;
     }
 

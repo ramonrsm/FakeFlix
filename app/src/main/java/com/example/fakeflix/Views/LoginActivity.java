@@ -1,10 +1,13 @@
 package com.example.fakeflix.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.fakeflix.Models.Entities.Authentication;
 import com.example.fakeflix.Models.Entities.Client;
 import com.example.fakeflix.Models.Exceptions.DomainException;
 import com.example.fakeflix.R;
@@ -12,6 +15,8 @@ import com.example.fakeflix.Util.Helpers;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,18 +49,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        Client client = new Client(1, "Ramon", "Moura",
-                textInputEditLayout_user.getText().toString(),
-                textInputEditLayout_password.getText().toString());
+        String email = Objects.requireNonNull(textInputEditLayout_user.getText()).toString();
+        String senha = Objects.requireNonNull(textInputEditLayout_password.getText()).toString();
 
-        try{
-            if(Helpers.IsEmpty(client)){
-                Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show();
+        try {
+            if(!Helpers.IsEmpty(email, senha)){
+
+                if(Authentication.SignIn(email,senha)){
+                    Toast.makeText(this, "Usuário autenticado", Toast.LENGTH_SHORT).show();
+                    Helpers.forActivity(LoginActivity.this, MainActivity.class);
+                    finish();
+                }
             }
-        }
-        catch (DomainException ex){
+        } catch (DomainException ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 }

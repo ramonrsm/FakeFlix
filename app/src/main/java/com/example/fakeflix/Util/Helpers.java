@@ -1,24 +1,31 @@
 package com.example.fakeflix.Util;
 
-import com.example.fakeflix.Models.Entities.Client;
+import android.content.Context;
+import android.content.Intent;
+
 import com.example.fakeflix.Models.Exceptions.DomainException;
 
 public class Helpers {
 
-    public static boolean IsEmpty(Client client) throws DomainException {
+    public static boolean IsEmpty(String email, String senha) throws DomainException {
 
-        if(client.getEmail().isEmpty() && client.getPassword().isEmpty()){
-            throw new DomainException("Digite seu e-mail e senha");
+        if(email.isEmpty() && senha.isEmpty()){
+            return true;
         }
 
-        if(client.getEmail().isEmpty()){
+        if(email.isEmpty()){
             throw new DomainException("Digite seu e-mail");
         }
 
-        if(client.getPassword().isEmpty()){
+        if(senha.isEmpty()){
             throw new DomainException("Digite sua senha");
         }
+        return false;
+    }
 
-        return true;
+    public static void forActivity(Context context, Class<?> cls){
+
+        Intent mainActivityIntent = new Intent(context, cls);
+        context.startActivity(mainActivityIntent);
     }
 }
