@@ -11,7 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.example.fakeflix.Views.InfoActivity" />
+        <activity
+            android:name="com.example.fakeflix.Views.InfoActivity"
+            android:parentActivityName=".Views.MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Views.MainActivity"
+            />
         <activity android:name="com.example.fakeflix.Views.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

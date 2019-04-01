@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fakeflix.Views.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.fakeflix.Views.MainActivity">
+
+    <include
+        android:id="@+id/toolbar_menu"
+        layout="@layout/toolbar"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Em alta"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+        android:text="@string/text_catalog_em_alta"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
     <include
-        android:id="@+id/recyclerView_catalog"
-        layout="@layout/recycle_view_catalog"/>
+        android:id="@+id/recyclerView_catalog_trending"
+        layout="@layout/recycle_view_catalog_trending" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_catalog_releases"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+    <include
+        android:id="@+id/recyclerView_catalog_releases"
+        layout="@layout/recycle_view_catalog_trending" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_catalog_series"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+    <include
+        android:id="@+id/recyclerView_catalog_series"
+        layout="@layout/recycle_view_catalog_trending" />
 
 </LinearLayout>

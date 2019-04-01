@@ -1,13 +1,10 @@
 package com.example.fakeflix.Models.Entities;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ColorDrawable;
 
 import com.example.fakeflix.Models.Enums.Category;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
 
 public class Movie implements Serializable {
 
@@ -16,25 +13,18 @@ public class Movie implements Serializable {
     private Integer        id;
     private String         name;
     private String         synopsis;
-    private Drawable       fetureImage;
-    private List<Category> categoryList = new ArrayList<>();
+    private URL            fetureImage;
+    private Category       category;
 
     public Movie() {
     }
 
-    public Movie(Integer id, String name, String synopsis, Drawable fetureImage) {
+    public Movie(Integer id, String name, String synopsis, URL fetureImage, Category category) {
         this.id = id;
         this.name = name;
         this.synopsis = synopsis;
         this.fetureImage = fetureImage;
-    }
-
-    public void addCategory(Category category){
-        categoryList.add(category);
-    }
-
-    public List<Category> findAllCategories(){
-        return categoryList;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -61,12 +51,20 @@ public class Movie implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public Drawable getFetureImage() {
+    public URL getFetureImage() {
         return fetureImage;
     }
 
-    public void setFetureImage(Drawable fetureImage) {
+    public void setFetureImage(URL fetureImage) {
         this.fetureImage = fetureImage;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
@@ -86,18 +84,12 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-
-        StringBuilder categories = new StringBuilder();
-
-        for (Category catgory : categoryList) {
-            categories.append(catgory.toString()).append(", ");
-        }
-
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", synopsis='" + synopsis + '\'' +
-                ", categoryList='"+ categories.toString() + '\'' +
+                ", fetureImage=" + fetureImage +
+                ", category=" + category +
                 '}';
     }
 }

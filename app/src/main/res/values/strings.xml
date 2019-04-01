@@ -9,4 +9,7 @@
 
     <string name="text_button_entrar">Entrar</string>
     <string name="text_toggle">MOSTRAR</string>
+    <string name="text_catalog_em_alta">Em alta</string>
+    <string name="text_catalog_releases">Lançamentos</string>
+    <string name="text_catalog_series">Séries</string>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.fakeflix.Controllers.MovieCatalog;
 import com.example.fakeflix.Models.Entities.Movie;
+import com.example.fakeflix.Models.Enums.Category;
 import com.example.fakeflix.R;
 import com.example.fakeflix.Util.Helpers;
 
@@ -46,17 +47,20 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             Bundle indexMovie = infoMovie.getExtras();
 
             if(indexMovie != null){
-                Movie movie = movieCatalog.findById(indexMovie.getInt("MOVIE"));
+
+                Category category = Category.valueOf(indexMovie.getString("MOVIE"));
+
+                Movie movie = movieCatalog.findByCategory(category).get(indexMovie.getInt("MOVIE"));
+
                 textView_Name.setText(movie.getName());
                 textView_Synopsis.setText(movie.getSynopsis());
-                imageView_Movie.setImageDrawable(movie.getFetureImage());
             }
         }
 
         toolbar_info.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
+                Helpers.goToActivity(InfoActivity.this, MainActivity.class);
                 return true;
             }
         });

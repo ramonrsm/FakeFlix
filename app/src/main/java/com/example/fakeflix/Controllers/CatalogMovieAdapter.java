@@ -1,6 +1,7 @@
 package com.example.fakeflix.Controllers;
 
-import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,7 @@ public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapte
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 
-        Movie movie = movieList.get(position);
-        holder.fetureImage = movie.getFetureImage();
-        holder.setImageViewFetureImage();
+        //Movie movie = movieList.get(position);
     }
 
     @Override
@@ -48,7 +47,6 @@ public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapte
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView imageViewFetureImage;
-        Drawable  fetureImage;
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,12 +57,11 @@ public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapte
         @Override
         public void onClick(View view) {
             if(mRecyclerViewOnClickListener != null){
-                mRecyclerViewOnClickListener.onClickListener(view, getLayoutPosition());
-            }
-        }
 
-        private void setImageViewFetureImage(){
-            imageViewFetureImage.setImageDrawable(fetureImage);
+                Movie movie = movieList.get(getLayoutPosition());
+
+                mRecyclerViewOnClickListener.onClickListener(view, movie.getId(), movie.getCategory());
+            }
         }
     }
 }
