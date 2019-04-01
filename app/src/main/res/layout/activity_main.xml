@@ -8,9 +8,13 @@
     tools:context="com.example.fakeflix.Views.MainActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Em alta"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
     <include
-        android:id="@+id/recyclerView_catalog_featureFilm"
-        layout="@layout/recycle_view_catalog"
-        />
+        android:id="@+id/recyclerView_catalog"
+        layout="@layout/recycle_view_catalog"/>
 
 </LinearLayout>

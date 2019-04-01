@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.fakeflix.Models.Entities.Catalog;
-import com.example.fakeflix.Models.Entities.FeatureFilm;
+import com.example.fakeflix.Controllers.MovieCatalog;
+import com.example.fakeflix.Models.Entities.Movie;
 import com.example.fakeflix.R;
 import com.example.fakeflix.Util.Helpers;
 
@@ -29,14 +30,14 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
         toolbar_info.setNavigationOnClickListener(this);
         setSupportActionBar(toolbar_info);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         ImageView imageView_Movie  = findViewById(R.id.imageView_Movie);
         TextView  textView_Name     = findViewById(R.id.textView_Name);
         TextView  textView_Synopsis = findViewById(R.id.textView_Synopsis);
 
-        Catalog catalog = Catalog.getInstance();
+        MovieCatalog movieCatalog = MovieCatalog.getInstance();
 
         Intent infoMovie = getIntent();
 
@@ -45,10 +46,10 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
             Bundle indexMovie = infoMovie.getExtras();
 
             if(indexMovie != null){
-                FeatureFilm featureFilm = catalog.get(indexMovie.getInt("MOVIE"));
-                textView_Name.setText(featureFilm.getName());
-                textView_Synopsis.setText(featureFilm.getSynopsis());
-                imageView_Movie.setImageDrawable(featureFilm.getFeatureImage());
+                Movie movie = movieCatalog.findById(indexMovie.getInt("MOVIE"));
+                textView_Name.setText(movie.getName());
+                textView_Synopsis.setText(movie.getSynopsis());
+                imageView_Movie.setImageDrawable(movie.getFetureImage());
             }
         }
 
@@ -63,6 +64,6 @@ public class InfoActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Helpers.forActivity(InfoActivity.this, MainActivity.class);
+        Helpers.goToActivity(InfoActivity.this, MainActivity.class);
     }
 }

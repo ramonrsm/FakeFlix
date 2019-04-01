@@ -1,25 +1,25 @@
 package com.example.fakeflix.Controllers;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import com.example.fakeflix.Models.Entities.FeatureFilm;
+import com.example.fakeflix.Models.Entities.Movie;
 import com.example.fakeflix.R;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CatalogFeatureFilmAdapter extends RecyclerView.Adapter<CatalogFeatureFilmAdapter.ItemViewHolder> {
+public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapter.ItemViewHolder>{
 
     private RecyclerViewOnClickListener mRecyclerViewOnClickListener;
-    private List<FeatureFilm> featureFilmList;
+    private List<Movie> movieList;
 
-    public CatalogFeatureFilmAdapter(List<FeatureFilm> featureFilmList) {
-        this.featureFilmList = featureFilmList;
+    public CatalogMovieAdapter(List<Movie> movieList) {
+        this.movieList = movieList;
     }
 
     @NonNull
@@ -31,31 +31,28 @@ public class CatalogFeatureFilmAdapter extends RecyclerView.Adapter<CatalogFeatu
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 
-        FeatureFilm featureFilm = featureFilmList.get(position);
-        holder.featureFilm = featureFilm;
-        holder.image = featureFilm.getFeatureImage();
-        holder.setFeatureImage();
+        Movie movie = movieList.get(position);
+        holder.fetureImage = movie.getFetureImage();
+        holder.setImageViewFetureImage();
     }
 
     @Override
     public int getItemCount() {
-        return featureFilmList.size();
+        return movieList.size();
     }
 
-    public void setRecyclerViewOnClickListener(RecyclerViewOnClickListener r){
-        mRecyclerViewOnClickListener = r;
+    public void setRecyclerViewOnClickListener(RecyclerViewOnClickListener recyclerView){
+        mRecyclerViewOnClickListener = recyclerView;
     }
-
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView   featureImage;
-        Drawable    image;
-        FeatureFilm featureFilm;
+        ImageView imageViewFetureImage;
+        Drawable  fetureImage;
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            featureImage = itemView.findViewById(R.id.featureImage);
+            imageViewFetureImage = itemView.findViewById(R.id.featureImage);
             itemView.setOnClickListener(this);
         }
 
@@ -66,8 +63,8 @@ public class CatalogFeatureFilmAdapter extends RecyclerView.Adapter<CatalogFeatu
             }
         }
 
-        private void setFeatureImage(){
-            featureImage.setImageDrawable(image);
+        private void setImageViewFetureImage(){
+            imageViewFetureImage.setImageDrawable(fetureImage);
         }
     }
 }

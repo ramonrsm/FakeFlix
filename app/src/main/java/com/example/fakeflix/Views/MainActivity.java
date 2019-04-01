@@ -3,18 +3,19 @@ package com.example.fakeflix.Views;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.example.fakeflix.Controllers.CatalogFeatureFilmAdapter;
+import com.example.fakeflix.Controllers.CatalogMovieAdapter;
+import com.example.fakeflix.Controllers.MovieCatalog;
 import com.example.fakeflix.Controllers.RecyclerViewOnClickListener;
-import com.example.fakeflix.Models.Entities.Catalog;
-import com.example.fakeflix.Models.Entities.FeatureFilm;
+import com.example.fakeflix.Models.Entities.Movie;
+import com.example.fakeflix.Models.Enums.Category;
 import com.example.fakeflix.R;
-import com.example.fakeflix.Util.Helpers;
 
 import java.util.List;
 
@@ -22,39 +23,45 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
     public static final int MAIN_ACTIVITY = 1;
 
-    private RecyclerView recyclerViewFeatureFilme;
-    private CatalogFeatureFilmAdapter catalogFeatureFilmAdapter;
-    private List<FeatureFilm> featureFilmList;
-    private Catalog catalog;
+    private MovieCatalog movieCatalog;
+    private List<Movie>  movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerViewFeatureFilme = findViewById(R.id.recyclerView_catalog_featureFilm);
-
-        catalog = Catalog.getInstance();
-
+        movieCatalog = MovieCatalog.getInstance();
         popularLista(5);
+        movieList = movieCatalog.findAll();
 
-        featureFilmList = catalog.getFeatureFilmList();
+        for (Movie movie : movieList) {
+            Log.i("MOVIE", movie.toString());
+        }
 
-        catalogFeatureFilmAdapter = new CatalogFeatureFilmAdapter(featureFilmList);
+        RecyclerView recyclerView_catalog = findViewById(R.id.recyclerView_catalog);
+
+        CatalogMovieAdapter catalogFeatureFilmAdapter = new CatalogMovieAdapter(movieList);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewFeatureFilme.setLayoutManager(layoutManager);
-        recyclerViewFeatureFilme.setAdapter(catalogFeatureFilmAdapter);
+        recyclerView_catalog.setLayoutManager(layoutManager);
+        recyclerView_catalog.setAdapter(catalogFeatureFilmAdapter);
+
         catalogFeatureFilmAdapter.setRecyclerViewOnClickListener(this);
     }
 
     public void popularLista(int quantidade){
 
-        FeatureFilm featureFilm;
+        Movie movie;
 
         for (int i = 0; i <= quantidade; i++){
-            featureFilm = new FeatureFilm(i, "Filme "+i, getDrawable(R.drawable.ic_launcher_background), "Sinopse "+i);
-            catalog.add(featureFilm);
+            movie = new Movie();
+            movie.setId(i);
+            movie.setName("Filme "+i);
+            movie.setSynopsis("Sinopse "+i);
+            movie.setFetureImage(getDrawable(R.drawable.ic_launcher_background));
+            movie.addCategory(Category.FEATURE_FILM);
+            movieCatalog.save(movie);
         }
     }
 
@@ -68,6 +75,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         startActivityForResult(infoIntent, MAIN_ACTIVITY);
 
-        Toast.makeText(view.getContext(), "Posição: "+positon+", "+featureFilmList.get(positon).getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(), "Posição: "+positon+", "+movieList.get(positon).getName(), Toast.LENGTH_SHORT).show();
     }
 }

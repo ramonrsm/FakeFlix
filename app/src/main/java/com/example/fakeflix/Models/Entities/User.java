@@ -1,22 +1,20 @@
 package com.example.fakeflix.Models.Entities;
 
-import java.util.Objects;
+import java.io.Serializable;
 
-public class Client {
+public class User implements Serializable {
+
+    private static final long serialVersionID = 1L;
 
     private Integer id;
-    private String  name;
-    private String  lastName;
     private String  email;
     private String  password;
 
-    public Client() {
+    public User() {
     }
 
-    public Client(Integer id, String name, String lastName, String email, String password) {
+    public User(Integer id, String email, String password) {
         this.id = id;
-        this.name = name;
-        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
@@ -27,22 +25,6 @@ public class Client {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -64,22 +46,22 @@ public class Client {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Client)) return false;
-        Client client = (Client) o;
-        return Objects.equals(getId(), client.getId());
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return id.equals(user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return id.hashCode();
     }
 
     @Override
     public String toString() {
-        return "Client{" +
+        return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

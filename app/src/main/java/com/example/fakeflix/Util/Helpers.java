@@ -23,7 +23,7 @@ public class Helpers {
         return false;
     }
 
-    public static void forActivity(Context context, Class<?> cls){
+    public static void goToActivity(Context context, Class<?> cls){
 
         Intent mainActivityIntent = new Intent(context, cls);
         context.startActivity(mainActivityIntent);
