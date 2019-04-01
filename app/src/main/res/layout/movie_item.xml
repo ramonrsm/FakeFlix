@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView
+<androidx.appcompat.widget.ContentFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/featureImage"
-    android:layout_width="110dp"
-    android:layout_height="170dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:background="@color/design_default_color_primary" />
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+    <ImageView
+        android:id="@+id/featureImage"
+        android:layout_width="110dp"
+        android:layout_height="170dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/design_default_color_primary"
+        android:contentDescription="@string/contentDescriptoption_movie" />
+
+    <TextView
+        android:id="@+id/textView_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_suspension_points"
+        android:textSize="30sp"
+        android:layout_gravity="center"/>
+
+</androidx.appcompat.widget.ContentFrameLayout>
+

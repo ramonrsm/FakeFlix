@@ -1,12 +1,11 @@
 package com.example.fakeflix.Controllers;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.fakeflix.Models.Entities.Movie;
 import com.example.fakeflix.R;
 import java.util.List;
@@ -32,7 +31,8 @@ public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapte
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 
-        //Movie movie = movieList.get(position);
+        Movie movie = movieList.get(position);
+        holder.setImageViewFetureImage(movie.getId());
     }
 
     @Override
@@ -46,11 +46,13 @@ public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapte
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+        TextView  textView_id;
         ImageView imageViewFetureImage;
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewFetureImage = itemView.findViewById(R.id.featureImage);
+            textView_id          = itemView.findViewById(R.id.textView_id);
             itemView.setOnClickListener(this);
         }
 
@@ -59,9 +61,13 @@ public class CatalogMovieAdapter extends RecyclerView.Adapter<CatalogMovieAdapte
             if(mRecyclerViewOnClickListener != null){
 
                 Movie movie = movieList.get(getLayoutPosition());
-
-                mRecyclerViewOnClickListener.onClickListener(view, movie.getId(), movie.getCategory());
+                mRecyclerViewOnClickListener.onClickListener(view, getLayoutPosition(), movie.getCategory());
             }
+        }
+
+        @SuppressLint("SetTextI18n")
+        void setImageViewFetureImage(Integer id){
+            textView_id.setText("Id: "+id);
         }
     }
 }

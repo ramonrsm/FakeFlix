@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,13 +15,14 @@
         android:id="@+id/imageView_Movie"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@color/colorAccent"/>
+        android:src="@color/colorAccent"
+        android:contentDescription="@string/contentDescriptoption_movie" />
 
     <TextView
         android:id="@+id/textView_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titulo"
+        android:text="@string/text_suspension_points"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Sinopse"
+        android:text="@string/text_suspension_points"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

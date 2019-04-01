@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import com.example.fakeflix.Controllers.CatalogMovieAdapter;
 import com.example.fakeflix.Controllers.MovieCatalog;
@@ -13,11 +16,34 @@ import com.example.fakeflix.Controllers.RecyclerViewOnClickListener;
 import com.example.fakeflix.Models.Entities.Movie;
 import com.example.fakeflix.Models.Enums.Category;
 import com.example.fakeflix.R;
+import com.example.fakeflix.Util.Helpers;
+
 public class MainActivity extends AppCompatActivity implements RecyclerViewOnClickListener {
 
     public static final int MAIN_ACTIVITY = 1;
+    private static boolean addMovies = false;
 
     private MovieCatalog movieCatalog;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_exit:
+                Helpers.goToActivity(this, LoginActivity.class);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +52,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         Toolbar toolbar_menu = findViewById(R.id.toolbar_menu);
         toolbar_menu.setTitle("FakeFlix");
+        setSupportActionBar(toolbar_menu);
 
         movieCatalog = MovieCatalog.getInstance();
-        popularLista(5);
+
+        if(!addMovies){
+            addFetureFilm(4);
+            addShortFilm(3);
+            addSerie(6);
+        }
+
+        addMovies = true;
 
         RecyclerView recyclerView_catalog_trending = findViewById(R.id.recyclerView_catalog_trending);
         CatalogMovieAdapter catalogFeatureFilmAdapter = new CatalogMovieAdapter(movieCatalog.findByCategory(Category.FEATURE_FILM));
@@ -55,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
         recyclerView_catalog_series.setAdapter(catalogFeatureFilmAdapter_series);
     }
 
-    public void popularLista(int quantidade){
+    public void addFetureFilm(int amount){
 
         Movie movie;
 
-        for (int i = 0; i < quantidade; i++){
+        for (int i = 0; i < amount; i++){
             movie = new Movie();
             movie.setId(i);
             movie.setName("Filme "+i);
@@ -68,8 +102,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
             movie.setCategory(Category.FEATURE_FILM);
             movieCatalog.save(movie);
         }
+    }
 
-        for (int i = 0; i < quantidade; i++){
+    public void addShortFilm(int amount){
+
+        Movie movie;
+
+        for (int i = 0; i < amount; i++){
             movie = new Movie();
             movie.setId(i);
             movie.setName("Curta Metragem "+i);
@@ -78,8 +117,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
             movie.setCategory(Category.SHORT_FILM);
             movieCatalog.save(movie);
         }
+    }
 
-        for (int i = 0; i < quantidade; i++){
+    public void addSerie(int amount){
+
+        Movie movie;
+
+        for (int i = 0; i < amount; i++){
             movie = new Movie();
             movie.setId(i);
             movie.setName("Série "+i);
@@ -94,9 +138,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     public void onClickListener(View view, int positon, Category category) {
 
         Bundle indexMovie = new Bundle();
-        indexMovie.putInt("MOVIE", positon);
+        indexMovie.putInt("position", positon);
 
-        indexMovie.putString("MOVIE", category.toString());
+        indexMovie.putString("category", category.toString());
 
         Intent infoIntent = new Intent(this, InfoActivity.class);
         infoIntent.putExtras(indexMovie);

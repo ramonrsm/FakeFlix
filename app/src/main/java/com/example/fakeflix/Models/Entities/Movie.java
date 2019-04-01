@@ -1,7 +1,5 @@
 package com.example.fakeflix.Models.Entities;
 
-import android.graphics.drawable.ColorDrawable;
-
 import com.example.fakeflix.Models.Enums.Category;
 import java.io.Serializable;
 import java.net.URL;

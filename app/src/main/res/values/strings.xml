@@ -12,4 +12,7 @@
     <string name="text_catalog_em_alta">Em alta</string>
     <string name="text_catalog_releases">Lançamentos</string>
     <string name="text_catalog_series">Séries</string>
+    <string name="text_suspension_points">…</string>
+    <string name="contentDescriptoption_movie">Movie</string>
+    <string name="menu_sair">SAIR</string>
 </resources>
